@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="titulo-pagina">Protótipo Upload e Download</ui:define>
+			<ui:define name="titulo">Tela de upload de arquivo</ui:define>
+				<ui:define name="palco">
+				<h:form enctype="multipart/form-data" id="form-upload" name="form-upload">  
+				  	<div id="upload">
+					  	<p:fileUpload fileUploadListener="#{BeanFile.escolherFoto}" value="#{BeanFile.file}"
+					  		showButtons="false" 
+				            sizeLimit="100000000"   
+				            allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+				            invalidFileMessage="Arquivo inválido"
+				            invalidSizeMessage="Tamanho inválido"
+				            mode="advanced"
+				            auto="true"  
+				            ajax="false"
+				            update="@form"
+				            label="Escolha a imagem"
+				            />
+				            <br />
+				        <div id="form-upload-fields">
+				            <h:panelGrid columns="2" columnClasses="rigth,completa" >
+					            <h:outputText value="Título: "></h:outputText>
+					            <p:inputText value="${BeanFile.entidade.titulo}" styleClass="largura_300 margin_2"></p:inputText>
+					            <h:outputText value="Descrição: "></h:outputText>
+					            <p:inputTextarea value="${BeanFile.entidade.descricao}" id="upload_descricao" styleClass="largura_300 margin_2"></p:inputTextarea>
+					            <p:spacer></p:spacer>
+					            <p:commandButton value="Salvar" ajax="false" actionListener="#{BeanFile.handleFileUpload2}"/> 
+				            </h:panelGrid>
+				        </div>    
+				        <div id="form-upload-image">
+				            <img src="images/uploads/thumbs/${BeanFile.entidade.url}" />
+				        </div>
+				  	</div>
+				    <p:growl id="messages" showDetail="true"/>  
+				</h:form> 
+				</ui:define>
+	</ui:composition>
+</html>

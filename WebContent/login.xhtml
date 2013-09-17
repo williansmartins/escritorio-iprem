@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"> 
+
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="login">
+		 		<div id="login" >
+		 			<h:form id="form-login" name="form-login">
+				 		Usuário: <p:inputText id="usuario" value="${BeanUsuario.usuarioLocal.usuario}"></p:inputText>
+				 		Senha: <p:password id="senha" value="${BeanUsuario.usuarioLocal.senha}"></p:password><p:spacer width="5" />
+				 		<p:commandButton value="Entrar" action="${BeanUsuario.login}" update="messages"></p:commandButton>
+				 		<p:growl id="messages" showDetail="false" autoUpdate="true" style="position:absolute" /> 
+		 			</h:form>
+		 		</div>
+			</ui:define>
+			<ui:define name="icones">
+			 	<div id="faixa-home-2">
+				 	<div class="icones" id="email"  >   			 </div>				 	
+				 	<div class="icones" id="dados"  >          		 </div>		
+				 	<div class="icones" id="compra" >  				 </div>				 	
+				 	<div class="icones" id="home" >  </div>	
+				 	<div id="titulo">:: <ui:insert name="titulo">Home</ui:insert></div>		
+			 	</div>	
+			<ui:define name="titulo-pagina">Tela inicial</ui:define>
+			</ui:define>
+			<ui:define name="titulo">Home</ui:define>
+			<ui:define name="palco">
+					login
+			</ui:define>
+	</ui:composition>
+
+</html>

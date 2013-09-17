@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3c.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:p="http://primefaces.org/ui">
+	 <h:head>
+	 	<link type="text/css" rel="stylesheet" href="css/estilos.css" />
+	 	<script language="javascript" src="js/scripts.js" ></script>
+	 </h:head>
+	 <f:view contentType="text/html"> 
+	 	<p:growl id="growl" sticky="true" showDetail="true"/> 
+	 	<h:body><h:form id="form-geral" name="form-geral">
+		 	<div id="wrapper">
+				 	<div id="faixa1" />
+				 	<div id="area-aluno">
+				 		<div id="logo" onclick="inicio()">
+				 			<img src="images/logo.jpg"/>
+				 		</div>
+				 		<div id="login">
+						 		<b><h:outputText value="Bem-vindo:" rendered="#{BeanUsuario.usuarioLocal.sexo=='m'}" /></b>
+						 		<b><h:outputText value="Bem-vinda:" rendered="#{BeanUsuario.usuarioLocal.sexo=='f'}" /></b>
+						 		<i><h:outputText value="${BeanUsuario.usuarioLocal.nome}"></h:outputText></i>
+						 		<p:spacer width="4"></p:spacer>
+						 		<p:commandButton id="sair"  value="Sair" icon="ui-icon-person" action="${BeanUsuario.sair}" update="@form" ></p:commandButton>
+						 		<p:spacer width="4"></p:spacer>
+				 		</div>
+				 	</div>
+				 	<div id="banner">
+				 		<img src="images/banner1.jpg"/>
+				 	</div>
+				 	<div id="faixa-home">
+				 		<div id="titulo">:: Listagem de usuários</div>
+					 	<div class="icones" id="email"  >   			 </div>				 	
+					 	<div class="icones" id="dados"  >          		 </div>		
+					 	<div class="icones" id="compra" >  				 </div>				 	
+					 	<div class="icones" id="home" onclick="home()">  </div>		
+				 	</div>				 	
+				 	<div id="palco">
+				 		<div id="palco2">
+				 			<div id="tabela">
+						 		<h:form id="form-listagem" name="form" prependId="false">
+								   <p:confirmDialog 	id="confirmDialog" 
+								    				 	message="Deseja realmente excluir este item? "  
+							              				header="Confirmação" 
+							              				severity="alert" 
+							              				widgetVar="confirmation"
+							              				modal="true">  
+								            				
+									        <p:commandButton 	id="confirm" 
+									        					value="Sim" 
+									        					update="@form" 
+									        					oncomplete="confirmation.hide()"  
+									                    		action="#{BeanUsuario.excluir}" /> 
+									                    		 
+									        <p:commandButton 	id="decline" 
+									        					value="Não" 
+									        					onclick="confirmation.hide()" 
+									        					type="button" />   
+									</p:confirmDialog> 								
+									<p:dataTable id="tb_listagem" var="entidade" value="#{BeanUsuario.lista}" emptyMessage="Nenhum registro encontrado" scrollable="true" scrollHeight="172">
+										<p:column headerText="Id" width="30" styleClass="center">  
+								            <h:outputText value="#{entidade.id}" />  
+								        </p:column>  
+										<p:column headerText="Nome" width="250"  styleClass="left">  
+								            <h:outputText value="#{entidade.nome}" />  
+								        </p:column>  
+										<p:column headerText="CPF" width="125" styleClass="center">  
+								            <h:outputText value="#{entidade.cpf}" />  
+								        </p:column>  
+										<p:column headerText="Sexo" width="30" styleClass="center">  
+								            <h:outputText value="#{entidade.sexo}" />  
+								        </p:column>  
+										<p:column headerText="Usuário" width="125" styleClass="left">  
+								            <h:outputText value="#{entidade.usuario}" />  
+								        </p:column>  
+										<p:column headerText="Tipo" width="80" styleClass="left">  
+								            <h:outputText value="#{entidade.tipo}" />  
+								        </p:column>  
+										<p:column headerText="Ações" width="100" styleClass="center">  
+										<p:commandLink id="btnExcluir" update="@form" oncomplete="confirmation.show();">
+											<h:graphicImage value="images/excluir.png" update="@form" ></h:graphicImage> 
+											<f:setPropertyActionListener value="#{entidade}" target="#{BeanUsuario.usuario}"  />
+										</p:commandLink>
+										<p:commandLink id="btnEditar" update="@form" action="#{BeanUsuario.incAltEditar}" >
+											<h:graphicImage value="images/editar.png" update="@form" ></h:graphicImage>
+											<f:setPropertyActionListener value="#{entidade}" target="#{BeanUsuario.usuario}"  />
+										</p:commandLink>
+																		
+								             
+								           	 
+								        </p:column>  
+									</p:dataTable>
+						 		</h:form>
+				 			</div>
+				 			<div id="botoes">
+								<p:commandButton value="Voltar" action="${BeanUsuario.voltar}"/>
+								<p:commandButton value="Inserir" action="${BeanUsuario.incAltInserir}"/>
+				 			</div>
+				 		</div>
+					</div>
+				 	<div id="faixa2"></div>
+			</div>
+		 </h:form></h:body>
+	</f:view>
+</html>

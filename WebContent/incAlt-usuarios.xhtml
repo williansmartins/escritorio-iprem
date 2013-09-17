@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	 xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:p="http://primefaces.org/ui">
+	 <h:head>
+	 	<link type="text/css" rel="stylesheet" href="css/estilos.css" />
+	 	<script src="js/scripts.js" ></script>
+	 </h:head>
+	 <f:view contentType="text/html"> 
+	 	<h:body>
+		 	<div id="wrapper">
+			 	<div id="">
+				 	<div id="faixa1" />
+				 	<div id="area-aluno">
+				 		<div id="logo">
+				 			<img src="images/logo.jpg" onclick="inicio()"/>
+				 		</div>
+				 		<div id="login">
+				 			<h:form>
+						 		<b><h:outputText value="Bem-vindo:" rendered="#{BeanUsuario.usuarioLocal.sexo=='m'}" /></b>
+						 		<b><h:outputText value="Bem-vinda:" rendered="#{BeanUsuario.usuarioLocal.sexo=='f'}" /></b>
+						 		<i><h:outputText value="${BeanUsuario.usuarioLocal.nome}"></h:outputText></i>
+						 		<p:spacer width="4"></p:spacer>
+						 		<p:commandButton id="sair"  value="Sair" icon="ui-icon-person" action="${BeanUsuario.sair}" update="@form" ></p:commandButton>
+						 		<p:spacer width="4"></p:spacer>
+					 		</h:form>
+				 		</div>
+				 	</div>
+				 	<div id="banner" onclick="preencher3()">
+				 		<img src="images/banner1.jpg" />
+				 	</div>
+				 	<div id="faixa-home">
+				 		<div id="titulo">:: Cadastro/Alteração de usuários</div>
+					 	<div class="icones" id="email"  >   			 </div>				 	
+					 	<div class="icones" id="dados"  >          		 </div>		
+					 	<div class="icones" id="compra" >  				 </div>				 	
+					 	<div class="icones" id="home" onclick="home()">  </div>			
+				 	</div>				 	
+				 	<div id="palco">
+				 		<div id="inc">
+				 			<h:form id="form" name="form">
+				 				
+				                <h:panelGrid columns="4" columnClasses="coluna1,coluna2,coluna3,coluna4">  
+				                    <h:outputText value="Nome:" />  
+				                    <p:inputText  label="nome" required="true" value="#{BeanUsuario.usuario.nome}" id="nome" requiredMessage="O nome é obrigatório"/>  
+				                      
+				                    <h:outputText value="Sexo: " />  
+									<p:selectOneButton value="#{BeanUsuario.usuario.sexo}" >  
+								        <f:selectItem itemLabel="M" itemValue="m" />  
+								        <f:selectItem itemLabel="F" itemValue="f" />  
+								    </p:selectOneButton>  
+				                              
+				                    <h:outputText value="CPF:" />  
+				                    <p:inputMask mask="999.999.999-99" id="cpf" label="cpf" value="#{BeanUsuario.usuario.cpf}" disabled="#{BeanUsuario.textoDoBotao != 'Inserir'}"/>  
+				                     
+				                    <h:outputText value="Estado: " />  
+				                    <p:inputText value="#{BeanUsuario.usuario.estado}" id="estado" />  
+				                      
+				                    
+				                    <h:outputText value="Telefone:" />  
+				                    <p:inputMask  label="telefone"  mask="(99) 9999-9999" id="telefone" value="#{BeanUsuario.usuario.telefone}" />
+				                            
+				                    <h:outputText value="Cidade: " />  
+				                    <p:inputText value="#{BeanUsuario.usuario.cidade}" id="cidade" />  
+				                      
+				                    <h:outputText value="Nascimento: " />  
+				                    <p:inputMask mask="99/99/9999" value="#{BeanUsuario.usuario.nascimento}" id="nascimento" />
+				                      
+				                    <h:outputText value="Usuário:" />  
+				                    <p:inputText value="#{BeanUsuario.usuario.usuario}" disabled="#{BeanUsuario.textoDoBotao != 'Inserir'}" id="usuario" required="true" requiredMessage="O usuário é obrigatório"/>  
+				                              
+				                    <h:outputText value="Email:" />  
+				                    <p:inputText label="email" value="#{BeanUsuario.usuario.email}" id="email"  required="true" requiredMessage="O email é obrigatório"/>
+				                    
+				                    <h:outputText value="Senha:" />  
+				                    <p:inputText value="#{BeanUsuario.usuario.senha}" id="senha"  required="true" requiredMessage="A senha é obrigatória"/> 
+				                     
+				                    <h:outputText value="Tipo: " />  
+							        <p:selectOneRadio id="tipo" value="#{BeanUsuario.usuario.tipo}"  required="true" requiredMessage="O tipo é obrigatório" styleClass="left5" >  
+							            <f:selectItem itemLabel="Simples" itemValue="simples"  id="opa1"/>  
+							            <f:selectItem itemLabel="Gestor" itemValue="gestor" id="opa2" />  
+							        </p:selectOneRadio> 
+				                </h:panelGrid>  
+			                    <p:commandButton value="#{BeanUsuario.textoDoBotao}" action="#{BeanUsuario.incAlt}" update="@form"/>  
+			                    <p:commandButton process="@this" value="Voltar" action="${BeanUsuario.voltar}" update="@form" />
+			                    <p:growl id="messages"></p:growl>
+				 			</h:form>
+				 		</div>
+				 	</div>
+				 	<div id="faixa2"></div>
+			 	</div>
+			</div>
+		 </h:body>
+	</f:view>
+</html>

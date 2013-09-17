@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="titulo-pagina">Protótipo Upload e Download</ui:define>
+			<ui:define name="titulo">Tela de gerenciamento de arquivo</ui:define>
+				<ui:define name="palco">
+				<h:form enctype="multipart/form-data" id="form-upload" name="form-upload">  
+				  	<div id="download">
+						<p>Download</p>
+						<p:dataTable id="tb_listagem" var="entidade" value="#{BeanFile.lista}" emptyMessage="Nenhum registro encontrado" scrollable="true" scrollHeight="172">
+							<p:column headerText="Id" width="30" styleClass="center">  
+					            <h:outputText value="#{entidade.id}" />  
+					        </p:column>  
+							<p:column headerText="Titulo" width="100"  styleClass="left">  
+					            <h:outputText value="#{entidade.titulo}" />  
+					        </p:column>  
+							<p:column headerText="Descrição" width="80" styleClass="left">  
+					            <h:outputText value="#{entidade.descricao}" />  
+					        </p:column>  
+							<p:column headerText="Ações" width="100" styleClass="center">  
+							<p:commandLink id="btnExcluir" update="@form" oncomplete="confirmation.show();">
+								<h:graphicImage value="images/excluir.png" update="@form" ></h:graphicImage> 
+								<f:setPropertyActionListener value="#{entidade}" target="#{BeanFile.usuario}"  />
+							</p:commandLink>
+							<p:commandLink id="btnEditar" update="@form" action="#{BeanFile.incAltEditar}" >
+								<h:graphicImage value="images/editar.png" update="@form" ></h:graphicImage>
+								<f:setPropertyActionListener value="#{entidade}" target="#{BeanFile.usuario}"  />
+							</p:commandLink>
+					        </p:column>  
+						</p:dataTable>
+				  	</div>
+				  	<p:confirmDialog 	id="confirmDialog" 
+			    				 	message="Deseja realmente excluir este item? "  
+		              				header="Confirmação" 
+		              				severity="alert" 
+		              				widgetVar="confirmation"
+		              				modal="true">  
+			            				
+				        <p:commandButton 	id="confirm" 
+				        					value="Sim" 
+				        					update="@form" 
+				        					oncomplete="confirmation.hide()"  
+				                    		action="#{BeanFile.excluir}" /> 
+				                    		 
+				        <p:commandButton 	id="decline" 
+				        					value="Não" 
+				        					onclick="confirmation.hide()" 
+				        					type="button" />  
+   					</p:confirmDialog>
+				    <p:growl id="messages" showDetail="true"/>  
+				</h:form> 
+				</ui:define>
+	</ui:composition>
+</html>

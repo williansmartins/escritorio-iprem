@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	 xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:p="http://primefaces.org/ui"> 
+	 <h:head>
+	 	<link type="text/css" rel="stylesheet" href="css/estilos.css" />
+	 	<script src="js/scripts.js" ></script>
+	 </h:head>
+	 <f:view contentType="text/html"> 
+	 	<h:body>
+	 		<h:form  id="form" name="form">
+	 		<p:growl />
+		 	<div id="wrapper">
+			 	<div id="">
+				 	<div id="faixa1" onclick="preencher()"/>
+				 	<div id="area-aluno">
+				 		<div id="logo">
+				 			<img src="images/logo.jpg" onclick="inicio()"/>
+				 		</div>
+				 		<div id="login" >
+						 		Usuário: <p:inputText id="usuario" value="${BeanUsuario.usuarioLocal.usuario}"></p:inputText>
+						 		Senha: <p:password id="senha" value="${BeanUsuario.usuarioLocal.senha}"></p:password><p:spacer width="5" />
+						 		<p:commandButton value="Entrar" action="${BeanUsuario.login}" update="messages"></p:commandButton>
+				 		</div>
+				 	</div>
+				 	<div id="banner">
+				 		<p:growl id="messages" showDetail="false" autoUpdate="true" style="position:absolute" /> 
+				 		<img src="images/banner1.jpg"/>
+				 	</div>
+				 	<div id="faixa-home-2">
+					 	<div class="icones" id="email"  >   			 </div>				 	
+					 	<div class="icones" id="dados"  >          		 </div>		
+					 	<div class="icones" id="compra" >  				 </div>				 	
+					 	<div class="icones" id="home" >  </div>			
+				 	</div>					 	
+				 	<div id="palco">
+				 		Tela de login
+				 	</div>
+				 	<div id="faixa2" onclick="preencher2()">  </div>
+				 	<div id="footer">
+					 	Copyright © 2005-2012 - PWMS - Produtora Web Martins - Todos os direitos reservados
+				 	</div>
+			 	</div>
+			</div>
+			
+			</h:form>
+		 </h:body>
+	</f:view>
+</html>
